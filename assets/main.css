@@ -1,0 +1,302 @@
+html {
+  overflow: hidden;
+  height: 100%;
+}
+
+body {
+  height: 100%;
+  overflow: auto;
+  margin: 0;
+  background-color: white;  
+}
+.container{
+  color: black;
+  display: flex;
+  justify-content: left;
+  align-items: center;
+  flex-direction: row;
+  height: 100vh;
+  width: 100%;
+  -webkit-align-items: stretch; /* Safari */
+  align-items: stretch;
+}
+
+#top{
+  max-height: 11vh;
+  background-color: #0099cc;
+  color: white;
+  min-height: 11vh;
+  height: 11vh;
+  min-width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 10;
+  overflow: hidden;
+}
+
+#mid{
+  background-color: pink;
+  display: flex;
+  flex-direction: column;
+  justify-content: left;
+  align-items: center;
+  min-width: 100%;
+  top: 11vh;
+  left: 0;
+  overflow: hidden;
+  position: relative;
+  z-index:1;
+}
+
+#bottom{
+  background-color: #0099cc;
+  color: white;
+  min-height: 8vh;
+  max-height: 8vh;
+  min-width: 100%;
+  position: fixed;
+  bottom: 0vh;
+  height: 8vh;
+  left: 0;
+  z-index:10;
+}
+#clock{
+  padding: 5px;
+  font-size: 10px;
+  display: flex;
+  align-items: flex-start;
+}
+#clock div{
+  padding-right: 5px;
+}
+#today{
+  top: 20px;
+  min-width: 40%;
+}
+#count{
+  display: flex;
+  width: 98%;
+  justify-content: flex-end
+}
+#navbar{
+  padding: 2vh;
+  font-size: 10px;
+  display: flex;
+  align-items: flex-start;
+}
+#navbar div{
+  padding-right: 15px;
+  text-align: top;
+}
+#edit{color: rgb(86, 86, 134); font-size: 200%;}
+#plus{color:rgb(86, 86, 134); font-size: 200%;}
+#trash{color: rgb(86, 86, 134); font-size: 200%;}
+#wipe{color: rgb(86, 86, 134); font-size: 200%;}
+#todos{
+  margin-top: 6vh;
+  width: 100%;
+  overflow:hidden;
+  -webkit-overflow-scrolling: touch;
+}
+h1{
+    color: rgb(76, 76, 136);
+    background: linear-gradient(110deg, #0099cc 60%, rgb(116, 203, 224) 60%);
+    font-family: 'Six Caps';
+    font-size: 60px;
+    font-weight: 400;
+    line-height: 60px;
+    letter-spacing: 10px;
+    margin-bottom: 30px;
+    text-indent: 20px;
+    text-transform: uppercase;
+}
+
+
+#add-to-do-wrap{display:none; width: 100%; background-color: rgb(62, 62, 95);}
+#new-todo-input {
+  width: 100%;
+  background-color: rgb(116, 203, 224);
+  border: 0;
+  padding-left: 8px;
+  flex: 1;
+  left: 0;
+  top: 0;
+}
+#new-todo-input:focus {
+  opacity: .9;
+}
+#addme{
+  width: 100%;
+  height: 7vh;
+  display:flex;
+}
+#add-to-do-wrap button{
+  background-color: #0099cc;
+  border: 0;
+  outline: 0;
+  color: white;
+  min-width: 15%;
+  max-width: 15%;
+  margin: 0;
+  flex: 0;
+  white-space: nowrap;
+  font-size: 84%;
+}
+#priority{
+  position: absolute;
+  top: 10vh;
+}
+button {
+  color: #000;
+  padding: 0;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 60%;
+  margin-left: 4vw;
+  margin-right: 4vw;
+}
+#title{
+  background-color: rgb(86, 86, 134);
+  width:100%;
+}
+
+.button:active {
+  box-shadow: 0 5px #666;
+  transform: translateY(-4px);
+}
+icon{
+  padding-right: 5px;
+  padding-left: 5px;
+  color: rgb(86, 86, 134);
+}
+icon:hover{
+  font-size: 124%;
+  color: rgb(66, 66, 128);
+}
+input{
+  background-color: transparent;
+  border: 0;
+  outline: 0;
+  padding: 6px;
+  width: 100%;
+  background: transparent;
+  border-bottom: 1px solid rgb(86, 86, 134);
+}
+.checked {
+  width: 16px;
+  height: 16px;
+  background: #fcfff4;
+  background: linear-gradient(top, #fcfff4 0%, #dfe5d7 40%, #b3bead 100%);
+  margin-right:10px;
+  }
+
+.checkdate {
+  font-size: 60%;
+  color: #808080;
+  padding-right: 5px;
+  min-width: 40px;
+}
+  
+.created{
+  font-size: 60%;
+  color: #808080;
+  padding-right: 5px;
+  min-width: 40px;
+}
+.todo{
+  display: flex;
+}
+
+#todos-container{
+   min-width: 100%;
+   background-color: transparent;
+  }
+
+  #inline-todo{
+    background-color: transparent;
+  }
+
+  #inline-todo .row{
+    display: flex;
+    flex: 1;
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
+  
+  #inline-todo .row{
+    display: flex;
+    flex: 1;
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
+  .col{
+    padding: 1vh 1vw;
+    background-color: transparent;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex: 1;
+    flex-direction: column;
+    color: white;
+    box-sizing:border-box;
+    flex-wrap: nowrap;
+  }
+ 
+#inline-todo .row:nth-child(even){
+  background-color: rgb(154, 216, 231);
+}
+
+.inline-checkbox{flex: 0 1 2vw; background-color: transparent;}
+.inline-createdate{flex: 0 1 6vw; background-color: transparent;}
+.inline-checkboxdate{flex: 0 1 6vw; background-color: transparent;}
+.inline-text{flex: 1 1 15vw; background-color: transparent;}
+.inline-del{flex: 0 1 2vw; background-color: transparent;}
+.inline-edit{flex: 0 1 2vw; background-color: transparent;}
+
+#sortrow{
+  display: flex;
+  flex: 1;
+  flex-direction: row;
+  flex-wrap: nowrap;
+}
+
+.sortcol{
+  background-color: transparent;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex: 1;
+  flex-direction: column;
+  box-sizing:border-box;
+  flex-wrap: nowrap;
+}
+.sortcheck{flex: 0 1 8vw; background-color: transparent;}
+.sortcreate{flex: 0 1 6vw; background-color: transparent;}
+.sortcheckboxdate{flex: 0 1 6vw; background-color: transparent;}
+#sort-todos-btn{
+  background-color: transparent;
+  border: 0;
+  outline: 0;
+  color: red;
+  font-size: 140%;
+  max-width: 25px;
+}
+
+/* .inline-priority{flex: 0 1 230px; background-color: gray;} */
+
+  label > input{ /* HIDE RADIO */
+    visibility: hidden; /* Makes input not-clickable */
+    position: absolute; /* Remove input from document flow */
+  }
+  label > input + img{ /* IMAGE STYLES */
+    cursor:pointer;
+    max-width: 20px;
+    border:2px solid transparent;
+  }
+  label > input:checked + img{ /* (RADIO CHECKED) IMAGE STYLES */
+    border:2px solid #f00;
+  }

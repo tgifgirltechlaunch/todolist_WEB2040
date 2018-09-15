@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt"
+    crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Six+Caps" rel="stylesheet">
+  <link rel="stylesheet" href="/main.css">
+
+  <title>Todo List</title>
+</head>
+
+<body>
+
+
+  <div class="container">
+      <div id="top">
+        <div id="clock">
+          <div id="clockicon"><i class="far fa-clock"></i></div>
+          <div id="today"></div>
+          <div id="count"></div>
+        </div>
+        <div id="navbar">
+          <div id="plus">
+            <i class="fas fa-plus"></i>
+          </div>
+          <div id="wipe">
+              <i class="fas fa-eraser"></i>
+            </div>
+        </div>
+      </div>
+
+      <div id="mid">
+        <div id="title"><h1>Things To Do</h1></div>
+          <div id="add-to-do-wrap">
+              <div id="addme">
+                <input type="text" id="new-todo-input">
+                <button id="add-todo-btn">ADD</button>
+              </div>
+            </div>
+            <div id="todos">
+              <div id="todos-container">
+                  
+                    
+                <div id="sortrow">
+                  <div class="sortcol sortcheck"></div>
+                  <div class="sortcol sortcreate"><button id="sort-todos-btn"><i class="fas fa-sort-down"></i></button></div>
+                  <div class="sortcol sortcheckdate"></div>
+                </div>
+                <div id="inline-todo"></div>
+              </div>
+            </div>
+      </div>
+
+      <div id="bottom"></div>
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+  <script src="/main.js"></script>
+</body>
+
+</html>
