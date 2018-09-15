@@ -8,6 +8,7 @@ body {
   overflow: auto;
   margin: 0;
   background-color: white;  
+  font-size: 14px;
 }
 .container{
   color: black;
@@ -22,11 +23,11 @@ body {
 }
 
 #top{
-  max-height: 11vh;
+  max-height: 14vh;
   background-color: #0099cc;
   color: white;
-  min-height: 11vh;
-  height: 11vh;
+  min-height: 14vh;
+  height: 14vh;
   min-width: 100%;
   position: fixed;
   top: 0;
@@ -42,22 +43,24 @@ body {
   justify-content: left;
   align-items: center;
   min-width: 100%;
-  top: 11vh;
+  min-height: 80vh;
+  top: 14vh;
   left: 0;
   overflow: hidden;
   position: relative;
   z-index:1;
+  bottom: 10vh;
 }
 
 #bottom{
   background-color: #0099cc;
   color: white;
-  min-height: 8vh;
-  max-height: 8vh;
+  min-height: 10vh;
+  max-height: 10vh;
   min-width: 100%;
   position: fixed;
   bottom: 0vh;
-  height: 8vh;
+  height: 10vh;
   left: 0;
   z-index:10;
 }
@@ -72,7 +75,7 @@ body {
 }
 #today{
   top: 20px;
-  min-width: 40%;
+  min-width: 20%;
 }
 #count{
   display: flex;
@@ -91,28 +94,29 @@ body {
 }
 #edit{color: rgb(86, 86, 134); font-size: 200%;}
 #plus{color:rgb(86, 86, 134); font-size: 200%;}
+#plus:hover{color:rgb(53, 53, 138); font-size: 210%;}
 #trash{color: rgb(86, 86, 134); font-size: 200%;}
 #wipe{color: rgb(86, 86, 134); font-size: 200%;}
+#wipe:hover{color:rgb(53, 53, 138); font-size: 210%;}
 #todos{
   margin-top: 6vh;
   width: 100%;
-  overflow:hidden;
+  overflow:auto;
   -webkit-overflow-scrolling: touch;
+  margin-bottom: 14vh;
 }
 h1{
-    color: rgb(76, 76, 136);
-    background: linear-gradient(110deg, #0099cc 60%, rgb(116, 203, 224) 60%);
-    font-family: 'Six Caps';
-    font-size: 60px;
-    font-weight: 400;
-    line-height: 60px;
-    letter-spacing: 10px;
-    margin-bottom: 30px;
-    text-indent: 20px;
-    text-transform: uppercase;
+  color: rgb(76, 76, 136);
+  background: linear-gradient(110deg, #0099cc 60%, rgb(116, 203, 224) 60%);
+  font-family: 'Six Caps';
+  font-size: 60px;
+  font-weight: 400;
+  line-height: 60px;
+  letter-spacing: 10px;
+  margin-bottom: 30px; 
+  text-indent: 20px;
+  text-transform: uppercase;
 }
-
-
 #add-to-do-wrap{display:none; width: 100%; background-color: rgb(62, 62, 95);}
 #new-todo-input {
   width: 100%;
@@ -143,40 +147,33 @@ h1{
   white-space: nowrap;
   font-size: 84%;
 }
-#priority{
-  position: absolute;
-  top: 10vh;
-}
-button {
-  color: #000;
-  padding: 0;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 60%;
-  margin-left: 4vw;
-  margin-right: 4vw;
-}
+
 #title{
   background-color: rgb(86, 86, 134);
   width:100%;
 }
 
-.button:active {
-  box-shadow: 0 5px #666;
-  transform: translateY(-4px);
-}
 icon{
-  padding-right: 5px;
-  padding-left: 5px;
   color: rgb(86, 86, 134);
+  background: #ededed;
+  border: 1px solid #ccc;
+  padding: 10px 10px;
+  border-radius: 3px;
+  cursor: pointer;
 }
 icon:hover{
-  font-size: 124%;
   color: rgb(66, 66, 128);
+}
+icon:active {
+  background: #e5e5e5;
+  -webkit-box-shadow: inset 0px 0px 5px #c1c1c1;
+  -moz-box-shadow: inset 0px 0px 5px #c1c1c1;
+   box-shadow: inset 0px 0px 5px #c1c1c1;
+   outline: none;
 }
 input{
   background-color: transparent;
+  font-size: 120%;
   border: 0;
   outline: 0;
   padding: 6px;
@@ -193,15 +190,15 @@ input{
   }
 
 .checkdate {
-  font-size: 60%;
-  color: #808080;
+  font-size: 100%;
+  color: rgb(86, 86, 134);
   padding-right: 5px;
   min-width: 40px;
 }
   
 .created{
-  font-size: 60%;
-  color: #808080;
+  font-size: 100%;
+  color: rgb(86, 86, 134);
   padding-right: 5px;
   min-width: 40px;
 }
@@ -221,50 +218,46 @@ input{
   #inline-todo .row{
     display: flex;
     flex: 1;
-    flex-direction: row;
-    flex-wrap: wrap;
-  }
-
-  
-  #inline-todo .row{
-    display: flex;
-    flex: 1;
+    justify-content: flex-start;
     flex-direction: row;
     flex-wrap: wrap;
   }
 
   .col{
-    padding: 1vh 1vw;
+    padding: 16px;
     background-color: transparent;
     display: flex;
     justify-content: center;
-    align-items: center;
-    flex: 1;
+    align-items: start;
+    flex: 1 1 10px;
     flex-direction: column;
     color: white;
     box-sizing:border-box;
     flex-wrap: nowrap;
   }
- 
+  
 #inline-todo .row:nth-child(even){
   background-color: rgb(154, 216, 231);
 }
 
-.inline-checkbox{flex: 0 1 2vw; background-color: transparent;}
-.inline-createdate{flex: 0 1 6vw; background-color: transparent;}
-.inline-checkboxdate{flex: 0 1 6vw; background-color: transparent;}
-.inline-text{flex: 1 1 15vw; background-color: transparent;}
-.inline-del{flex: 0 1 2vw; background-color: transparent;}
-.inline-edit{flex: 0 1 2vw; background-color: transparent;}
+.inline-checkbox{width: 80px; flex: 0 0 80px; background-color: transparent;}
+.inline-createdate{width: 130px; flex: 0 0 130px; background-color: transparent;}
+.inline-checkboxdate{width: 130px; flex: 0 0 130px; background-color: transparent;}
+.inline-text{background-color: transparent;}
+.inline-del{width: 80px; flex: 0 0 80px;background-color: transparent;}
+.inline-edit{width: 80px; flex: 0 0 80px; background-color: transparent;}
+.inline-priority{width: 80px; flex: 0 0 80px; background-color: transparent;}
 
 #sortrow{
   display: flex;
   flex: 1;
   flex-direction: row;
+  justify-content: space-evenly;
   flex-wrap: nowrap;
 }
 
 .sortcol{
+  margin: 6px;
   background-color: transparent;
   display: flex;
   justify-content: center;
@@ -274,9 +267,9 @@ input{
   box-sizing:border-box;
   flex-wrap: nowrap;
 }
-.sortcheck{flex: 0 1 8vw; background-color: transparent;}
-.sortcreate{flex: 0 1 6vw; background-color: transparent;}
-.sortcheckboxdate{flex: 0 1 6vw; background-color: transparent;}
+.sortcheck{width: 80px; flex: 0 0 80px; background-color: transparent;}
+.sortcreate{width: 40px; flex: 0 0 40px; background-color: transparent;}
+.sortcheckboxdate{width: 130px; flex: 0 0 130px; background-color: transparent;}
 #sort-todos-btn{
   background-color: transparent;
   border: 0;
@@ -286,17 +279,66 @@ input{
   max-width: 25px;
 }
 
-/* .inline-priority{flex: 0 1 230px; background-color: gray;} */
+.priority i{
+  color:  #a3c018;
+}
 
   label > input{ /* HIDE RADIO */
     visibility: hidden; /* Makes input not-clickable */
     position: absolute; /* Remove input from document flow */
   }
-  label > input + img{ /* IMAGE STYLES */
+  label > input + img{
     cursor:pointer;
     max-width: 20px;
     border:2px solid transparent;
   }
-  label > input:checked + img{ /* (RADIO CHECKED) IMAGE STYLES */
+  label > input:checked + img{ 
     border:2px solid #f00;
   }
+  button {
+    background: #ededed;
+    border: 1px solid #ccc;
+    padding: 10px 15px;
+    border-radius: 3px;
+    cursor: pointer;
+  }
+  
+  button:active {
+    background: #e5e5e5;
+    -webkit-box-shadow: inset 0px 0px 5px #c1c1c1;
+    -moz-box-shadow: inset 0px 0px 5px #c1c1c1;
+    box-shadow: inset 0px 0px 5px #c1c1c1;
+    outline: none;
+    text-transform: none;
+  }
+
+  button:focus {
+    outline: none;
+}
+
+#exclamation{
+  background: #ededed;
+    border: 1px solid #ccc;
+    padding: 10px 15px;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+
+#exclamation:active {
+  background: #e5e5e5;
+  -webkit-box-shadow: inset 0px 0px 5px #c1c1c1;
+  -moz-box-shadow: inset 0px 0px 5px #c1c1c1;
+  box-shadow: inset 0px 0px 5px #c1c1c1;
+  outline: none;
+  text-transform: none;
+}
+
+#exclamation:focus {
+  outline: none;
+}
+
+@media only screen and (max-width: 600px) {
+
+  .inline-text{width: 90vw; flex: 0 0 90vw;}
+}

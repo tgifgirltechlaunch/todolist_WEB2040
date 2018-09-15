@@ -1,4 +1,3 @@
-//browser does not understand requires unless you use webpack or something similar to bundle it
 var express = require('express');
 var app = express();
 
@@ -26,7 +25,7 @@ app.use(function (req, res, next) {
   next();
 });
 
-//dirname is a global variable courtesy of Node.js and it returns the absolute path
+
 app.use("/", express.static(__dirname + "/assets"));
 
 require('./routes')(app, database);

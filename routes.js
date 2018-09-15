@@ -19,7 +19,7 @@ module.exports = function(app, database){
         `SELECT * FROM todos`,
         function (error, results, fields){
             if(error) throw error;
-            console.log('results: ', results);
+            console.log('results:::::: ', results);
             res.send(results);
         });
   });
@@ -36,7 +36,7 @@ module.exports = function(app, database){
 
   app.get('/sort-todos-asc', function (req, res) {
     database.query(
-        `SELECT * FROM todos ORDER BY created ASC`,
+        `SELECT * FROM todos ORDER BY created`,
         function (error, results, fields){
             if(error) throw error;
             console.log('results: ', results);
@@ -129,7 +129,7 @@ module.exports = function(app, database){
 
   app.put('/create-todo', function (req, res) {
     let text = req.body.text;
-    let created = moment().format('YYYY-MM-DD HH:mm Z');
+    let created = new Date().toISOString().slice(0, 19).replace('T', ' ');
 
     database.query(
         `INSERT INTO todos (text, created) VALUES('${text}', '${created}');`,
@@ -141,7 +141,6 @@ module.exports = function(app, database){
   });
 
   app.post('/update-todo', function (req, res) {
-    console.log('update to do');
     let id = req.body.id;
     let done = req.body.completed;
 
@@ -155,9 +154,24 @@ module.exports = function(app, database){
   });
   
 
+  app.post('/priority', function (req, res) {
+    let id = req.body.id;
+    let pri = req.body.priority;
+
+    console.log("------>>>>>>>" + pri)
+    database.query(
+        `UPDATE todos SET priority = '${pri}' WHERE id = ${id};`,
+        function (error, results, fields){
+            if(error) throw error;
+            console.log('results: ', results);
+            res.send(results);
+        });
+  });
+  
+
   app.put('/checkdate-todo', function (req, res) {
     let id = req.body.id;
-    let checkdate = req.body.checkdate;
+    let checkdate = new Date().toISOString().slice(0, 19).replace('T', ' ');
 
     database.query(
         `UPDATE todos SET checkboxdate = '${checkdate}' WHERE id = ${id};`,

@@ -1,14 +1,12 @@
 window.onload = function(){
   const todosContainer = document.getElementById('todos-container');
   const inlinetodo = document.getElementById('inline-todo');
-  
   const newTodoInput = document.getElementById('new-todo-input');
   const addTodoBtn = document.getElementById('add-todo-btn');
   const sortTodoBtn = document.getElementById('sort-todos-btn');
   const plusIcon = document.getElementById('plus');
   const wipeIt = document.getElementById('wipe');
 
-  // const editOverlay = this.document.getElementById('edit');
 
   cDate();
   keepCount();
@@ -32,7 +30,6 @@ window.onload = function(){
   
   sortTodoBtn.onclick = function(e) {
     // console.log("sort btn click");
-
     if(document.getElementsByClassName("fa-sort-down").length > 0){
       // console.log("element exists");
       sortTodoBtn.getElementsByClassName("fa-sort-down")[0].className = 'fas fa-sort-up';
@@ -43,7 +40,6 @@ window.onload = function(){
       sortTodoBtn.getElementsByClassName("fa-sort-up")[0].className = 'fas fa-sort-down';
       sortTodosasc();
     }
-    
   }
 
   wipeIt.onclick = function(e) {
@@ -75,16 +71,13 @@ function insertTodo(todo) {
   <div id="${'inlineedit-' + container.id}" class="inline-edit col"></div>
   <div id="${'inlinepriority-' + container.id}" class="inline-priority col"></div>
  `;
- 
 
-//  var ttest = "#inlinecheckbox-" + container.id;
-//  console.log("id name " + test);
-//let checkbox = $( ttest ).append(document.createElement('input'));
   let checkbox = document.createElement('input');
   checkbox.type = 'checkbox';
   checkbox.id = 'checkbox-' + todo.id;
   checkbox.classList.add('checked');
   checkbox.checked = todo.completed;
+
   let checkdate = document.createElement('span');
   checkdate.id = 'checkdate-' + todo.id;
   checkdate.classList.add('checkdate');
@@ -94,7 +87,7 @@ function insertTodo(todo) {
     var t = todo.checkboxdate.split(/[T]/);
     // Apply each element to the Date function
     var d = t[0].split(/[-]/);
-    var f =  d[1]+"-"+d[2]+"-"+d[0];
+    var f =  d[1]+"/"+d[2]+"/"+d[0];
     // console.log("split date " + t + " testing date " + f);
     checkdate.innerHTML += `${f}`;
   }
@@ -110,10 +103,11 @@ function insertTodo(todo) {
       var n2 = todo.checkboxdate.split(/[ ]/);
       var d2 = n2[0].split(/[-]/);
       var tempDate2 = d2[1] + "/" + d2[2] + "/" + d2[0];
-      // console.log('checkbox checked? if so, date should be inserted. ' + todo.checkboxdate + " " + checkbox.checked);
+      // console.log('checkbox checked? if so, date should be inserted. ' + todo.checkboxdate + " " + checkbo$
       checkdate.innerHTML = `${tempDate2}`;
       console.log("tempdate2 " + tempDate2);
     }
+
     else{
       // console.log("checkbox not checked? date should be blank. if not remove")
       todo.checkboxdate = "";
@@ -145,10 +139,44 @@ function insertTodo(todo) {
   text.type = 'text';
   text.id = 'text-' + todo.id;
   text.value = todo.text;
+  
+  let priority = document.createElement('span');
+  priority.id = 'priority-' + todo.id;
+  priority.classList.add('priority');
+
+  let colorPriority = colorChanger(todo.priority);
+  priority.innerHTML= `${colorPriority}`;
+  priority.onclick = function (e) {
+  
+  let priorityText = setPriority(todo.priority);
+  let colorPriority = colorChanger(priorityText);
+  
+  todo.priority = priorityText;
+  
+  fetch('/priority', {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+      },
+      credentials: "include",
+      body: JSON.stringify({
+        id: todo.id,
+        priority: todo.priority,
+      })
+    })
+      .then(response => response.json())
+      .then(response => {
+        // console.log(response);
+        priority.innerHTML= `${colorPriority}`;
+      })
+      .catch(error => console.error(error));
+  }
 
   let createdDate = document.createElement('span');
   createdDate.id = 'createdDate-' + todo.id;
   createdDate.classList.add('created');
+
   if(todo.created){
     // console.log('createdDate ' + todo.created);
     // Split timestamp into [ Y, M, D, h, m, s ]
@@ -169,13 +197,10 @@ function insertTodo(todo) {
     createdDate.innerHTML += `${tempDate}`;
   }
   
-
   let edit = document.createElement('icon');
     edit.classList.add('far');
     edit.classList.add('fa-edit');
     edit.id = 'edit-' + todo.id;
-    
-    
     edit.onclick = function (e) {
       // console.log('editing ' + todo.id);
 
@@ -202,7 +227,6 @@ function insertTodo(todo) {
     btn.classList.add('fas');
     btn.classList.add('fa-trash-alt');
     btn.id = 'btn-' + todo.id;
-    // btn.innerHTML = 'X';
     btn.onclick = function (e) {
       console.log('deleting ' + todo.id);
       
@@ -229,15 +253,13 @@ function insertTodo(todo) {
         .catch(error => console.error(error));
     }
 
-    
-
       var one = "inlinecheckbox-" + container.id;
       var two = "inlinecreatedate-" + container.id;
       var three = "inlinecheckboxdate-" + container.id;
       var four = "inlinetext-" + container.id;
       var five = "inlinedel-" + container.id;
       var six = "inlineedit-" + container.id;
-      // var seven = "inlinepriority-" + container.id;
+      var seven = "inlinepriority-" + container.id;
       
       
       inlinetodo.appendChild(container);     
@@ -247,7 +269,7 @@ function insertTodo(todo) {
       document.getElementById(four).appendChild(text);
       document.getElementById(five).appendChild(btn);
       document.getElementById(six).appendChild(edit);
-      // document.getElementById(seven).appendChild("priority");
+      document.getElementById(seven).appendChild(priority);
       todosContainer.appendChild(inlinetodo);
 
 }
@@ -287,6 +309,21 @@ function keepCount(){
     .catch(error => console.error(error));
 }
 
+function colorChanger(item){
+    if(item === 'high'){
+        item = `<i id="exclamation" style="color: red;" class="fas fa-exclamation"></i>`
+        return item;
+    }
+    if(item === 'medium'){
+        item = `<i id="exclamation" style="color: #ff9900;" class="fas fa-exclamation"></i>`
+        return item;
+    }
+    if(item === 'low'){
+        item = `<i id="exclamation" style="color: #a3c018;" class="fas fa-exclamation"></i>`
+        return item;
+    }
+}
+
 function WipeTable(){
   fetch('/wipe-todo', {
       method: 'DELETE',
@@ -305,7 +342,6 @@ function WipeTable(){
           container.remove();
           keepCount();
         }
-
       })
       .catch(error => console.error(error));
 }
@@ -346,7 +382,7 @@ function createTodo() {
             text: newTodoInput.value,
             created: response.created,
             completed: false,
-            priority: response.priority,
+            priority: 'low',
             checkboxdate: null
           });
           newTodoInput.value = '';
@@ -364,8 +400,22 @@ function createTodo() {
   }
 }
 
+
+function setPriority(current) {
+
+  if (current === 'medium'){
+    return 'high';
+  }
+  else if (current === 'high'){
+    return 'low';
+  }
+  else{
+    return 'medium';
+  }
+}
+
 function sortTodosdesc() {
-  // console.log('sort todos');
+  console.log('sort todos');
   $('#inline-todo > div').remove();
   
   fetch('/sort-todos-desc')
@@ -379,7 +429,7 @@ function sortTodosdesc() {
   }
 
 function sortTodosasc() {
-  // console.log('sort todos');
+  console.log('sort todos');
   $('#inline-todo > div').remove();
   
   fetch('/sort-todos-asc')
