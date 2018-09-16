@@ -42,10 +42,6 @@ window.onload = function(){
     }
   }
 
-  wipeIt.onclick = function(e) {
-    // console.log("wipe btn click");
-    WipeTable();
-  }
 
 fetch('/get-todos')
 .then(response => response.json())
@@ -272,6 +268,33 @@ function insertTodo(todo) {
       document.getElementById(seven).appendChild(priority);
       todosContainer.appendChild(inlinetodo);
 
+          
+wipeIt.onclick = function(e) {
+  WipeTable();
+}
+
+
+function WipeTable(){
+  fetch('/wipe-todo', {
+      method: 'DELETE',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+      },
+      credentials: "include"
+    })
+      .then(response => response.json())
+      .then(response => {        
+          var inline = document.getElementById('inline-todo');
+         
+          inline.innerHTML = "";
+          document.getElementById('count').innerHTML = "";
+          keepCount();
+      })
+      .catch(error => console.error(error));
+}
+
+
 }
 //END INSERTTODO
 //START FUNCTIONS
@@ -324,27 +347,6 @@ function colorChanger(item){
     }
 }
 
-function WipeTable(){
-  fetch('/wipe-todo', {
-      method: 'DELETE',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
-      },
-      credentials: "include",
-    })
-      .then(response => response.json())
-      .then(response => {
-        // console.log(response);
-        if (response.affectedRows) {
-          console.log("successfully wiped table");
-          document.getElementById('count').innerHTML = "";
-          container.remove();
-          keepCount();
-        }
-      })
-      .catch(error => console.error(error));
-}
 
   function cDate(){
     var today = document.getElementById('today');
@@ -356,7 +358,6 @@ function WipeTable(){
                 + currentdate.getMinutes() + ":" 
                 + currentdate.getSeconds();
     today.innerHTML += `<div>${datetime}</div>`;
-    // document.getElementById('today').innerHTML += datetime;
   }
 
 function createTodo() {
@@ -393,7 +394,6 @@ function createTodo() {
           alert('Could not create');
         }
       })
-      // .catch(error => console.error(error));
   }
   else {
     alert('You can not create a todo without text');
